@@ -1,14 +1,14 @@
 {
-    "name": "casbin/casbin",
+    "name": "maxinyugh/php-casbin",
     "description": "a powerful and efficient open-source access control library for php projects.",
     "authors": [
         {
-            "name": "TechLee",
-            "email": "techlee@qq.com"
+            "name": "maxinyu",
+            "email": "408567964@qq.com"
         }
     ],
     "license": "Apache-2.0",
-    "keywords": [        
+    "keywords": [
         "casbin",
         "rbac",
         "acl",
