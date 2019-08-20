@@ -159,6 +159,22 @@ trait RbacApi
     }
 
     /**
+     * adds a permissions for a user or role.
+     * returns false if the user or role already has the permissions (aka not affected).
+     *
+     * @param array ...$permissions
+     *
+     * @return bool
+     */
+    public function addPermissionsForUser(array $user_permissions)
+    {
+        if (!$user_permissions) {
+            return true;
+        }
+        return $this->addPolicies($user_permissions);
+    }
+
+    /**
      * deletes a permission for a user or role.
      * returns false if the user or role does not have the permission (aka not affected).
      *
@@ -177,6 +193,19 @@ trait RbacApi
         }
 
         return $this->removePolicy(...$params);
+    }
+
+    /**
+     * deletes permissions for a user or role.
+     * returns false if the user or role does not have any permissions (aka not affected).
+     *
+     * @param string $user
+     *
+     * @return bool
+     */
+    public function deletePermissionsFromUser(array $permissions)
+    {
+        return $this->removePolicies($permissions);
     }
 
     /**

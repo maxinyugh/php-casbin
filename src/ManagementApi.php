@@ -246,6 +246,20 @@ trait ManagementApi
     }
 
     /**
+     * addPolicies adds an authorization rule to the current policies.
+     * If the rule already exists, the function returns false and the rule will not be added.
+     * Otherwise the function returns true by adding the new rule.
+     *
+     * @param mixed ...$params
+     *
+     * @return bool
+     */
+    public function addPolicies(array $params)
+    {
+        return $this->addNamedPolicies('p', $params);
+    }
+
+    /**
      * AddNamedPolicy adds an authorization rule to the current named policy.
      * If the rule already exists, the function returns false and the rule will not be added.
      * Otherwise the function returns true by adding the new rule.
@@ -274,6 +288,21 @@ trait ManagementApi
     }
 
     /**
+     * addNamedPolicies adds an authorization rule to the current named policies.
+     * If the rule already exists, the function returns false and the rule will not be added.
+     * Otherwise the function returns true by adding the new rule.
+     *
+     * @param string $ptype
+     * @param array $params
+     *
+     * @return bool
+     */
+    public function addNamedPolicies(string $ptype, array $params)
+    {
+        return $this->addPoliciesInternal('p', $ptype, $params);
+    }
+
+    /**
      * removes an authorization rule from the current policy.
      *
      * @param mixed ...$params
@@ -283,6 +312,18 @@ trait ManagementApi
     public function removePolicy(...$params)
     {
         return $this->removeNamedPolicy('p', ...$params);
+    }
+
+    /**
+     * removes an authorization rule from the current policies.
+     *
+     * @param array $params
+     *
+     * @return bool
+     */
+    public function removePolicies(array $params)
+    {
+        return $this->removeNamedPolicies('p', $params);
     }
 
     /**
@@ -296,6 +337,19 @@ trait ManagementApi
     public function removeFilteredPolicy($fieldIndex, ...$fieldValues)
     {
         return $this->removeFilteredNamedPolicy('p', $fieldIndex, ...$fieldValues);
+    }
+
+    /**
+     * removes an authorization rule from the current named policies.
+     *
+     * @param string $ptype
+     * @param array $params
+     *
+     * @return bool
+     */
+    public function removeNamedPolicies(string $ptype, array $params)
+    {
+        return $this->removePoliciesInternal('p', $ptype, $params);
     }
 
     /**
