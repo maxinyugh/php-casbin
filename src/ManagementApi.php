@@ -218,17 +218,10 @@ trait ManagementApi
     public function hasNamedPolicy($ptype, ...$params)
     {
         if (1 == count($params) && is_array($params[0])) {
-            $strSlice = $params[0];
-
-            return $this->model->hasPolicy('p', $ptype, $strSlice);
+            $params = $params[0];
         }
 
-        $policy = [];
-        foreach ($params as $param) {
-            $policy[] = $param;
-        }
-
-        return $this->model->hasPolicy('p', $ptype, $policy);
+        return $this->model->hasPolicy('p', $ptype, $params);
     }
 
     /**
@@ -271,20 +264,11 @@ trait ManagementApi
      */
     public function addNamedPolicy($ptype, ...$params)
     {
-        $ruleAdded = false;
         if (1 == count($params) && is_array($params[0])) {
-            $strSlice = $params[0];
-            $ruleAdded = $this->addPolicyInternal('p', $ptype, $strSlice);
-        } else {
-            $policy = [];
-            foreach ($params as $param) {
-                $policy[] = $param;
-            }
-
-            $ruleAdded = $this->addPolicyInternal('p', $ptype, $policy);
+            $params = $params[0];
         }
 
-        return $ruleAdded;
+        return $this->addPolicyInternal('p', $ptype, $params);
     }
 
     /**
@@ -362,20 +346,11 @@ trait ManagementApi
      */
     public function removeNamedPolicy($ptype, ...$params)
     {
-        $ruleRemoved = false;
         if (1 == count($params) && is_array($params[0])) {
-            $strSlice = $params[0];
-            $ruleAdded = $this->removePolicyInternal('p', $ptype, $strSlice);
-        } else {
-            $policy = [];
-            foreach ($params as $param) {
-                $policy[] = $param;
-            }
-
-            $ruleRemoved = $this->removePolicyInternal('p', $ptype, $policy);
+            $params = $params[0];
         }
 
-        return $ruleRemoved;
+        return $this->removePolicyInternal('p', $ptype, $params);
     }
 
     /**
@@ -415,17 +390,10 @@ trait ManagementApi
     public function hasNamedGroupingPolicy($ptype, ...$params)
     {
         if (1 == count($params) && is_array($params[0])) {
-            $strSlice = $params[0];
-
-            return $this->model->hasPolicy('g', $ptype, $strSlice);
+            $params = $params[0];
         }
 
-        $policy = [];
-        foreach ($params as $param) {
-            $policy[] = $param;
-        }
-
-        return $this->model->hasPolicy('g', $ptype, $policy);
+        return $this->model->hasPolicy('g', $ptype, $params);
     }
 
     /**
@@ -454,18 +422,11 @@ trait ManagementApi
      */
     public function addNamedGroupingPolicy($ptype, ...$params)
     {
-        $ruleAdded = false;
         if (1 == count($params) && is_array($params[0])) {
-            $strSlice = $params[0];
-            $ruleAdded = $this->addPolicyInternal('g', $ptype, $strSlice);
-        } else {
-            $policy = [];
-            foreach ($params as $param) {
-                $policy[] = $param;
-            }
-
-            $ruleAdded = $this->addPolicyInternal('g', $ptype, $policy);
+            $params = $params[0];
         }
+
+        $ruleAdded = $this->addPolicyInternal('g', $ptype, $params);
 
         if ($this->autoBuildRoleLinks) {
             $this->buildRoleLinks();
@@ -509,18 +470,11 @@ trait ManagementApi
      */
     public function removeNamedGroupingPolicy($ptype, ...$params)
     {
-        $ruleRemoved = false;
         if (1 == count($params) && is_array($params[0])) {
-            $strSlice = $params[0];
-            $ruleRemoved = $this->removePolicyInternal('g', $ptype, $strSlice);
-        } else {
-            $policy = [];
-            foreach ($params as $param) {
-                $policy[] = $param;
-            }
-
-            $ruleRemoved = $this->removePolicyInternal('g', $ptype, $policy);
+            $params = $params[0];
         }
+
+        $ruleRemoved = $this->removePolicyInternal('g', $ptype, $params);
 
         if ($this->autoBuildRoleLinks) {
             $this->buildRoleLinks();
